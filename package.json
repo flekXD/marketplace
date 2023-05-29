@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "marketplace",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flekXD/marketplace.git"
+  },
+  "author": "flekx",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flekXD/marketplace/issues"
+  },
+  "homepage": "https://github.com/flekXD/marketplace#readme",
+  "description": ""
+}
