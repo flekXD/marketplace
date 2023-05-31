@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -31,7 +30,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        min: [7,'please add some symb.'],
+        min: [7,'please add some symbols'],
         trim : true,
         bcrypt : true,
         validate: {
@@ -108,6 +107,25 @@ userSchema.methods.toJSON = function (){
     delete userObject.tokens;
     return userObject;
 }
-const User = mongoose.model('users', userSchema);
+const User = mongoose.model('User', userSchema);
+const newUser = new User({
+    first_name: 'John',
+    last_name: 'Doe',
+    email: 'johndoe@example.com',
+    password: 'pass123',
+    tokens: [
+      { token: 'token123' },
+      { token: 'token456' }
+    ]
+  });
+  
+  // Save the new user to the database
+  newUser.save()
+    .then(savedUser => {
+      console.log('User saved:', savedUser);
+    })
+    .catch(error => {
+      console.error('Error saving user:', error);
+    });
 
 module.exports = User;

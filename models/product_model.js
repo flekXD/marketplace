@@ -27,7 +27,7 @@ const productSchema = new mongoose.Schema({
       trim : true
     },
     status: {
-      type: bool,
+      type: Boolean,
       required: true,
       trim : true
     },
@@ -50,13 +50,13 @@ const productSchema = new mongoose.Schema({
     }
   }, {toJson : {virtual: true}, toObject: {virtual:true}})
 
-  userSchema.virtual('Review', {
+  productSchema.virtual('Review', {
     ref: "Review",
     localField : '_id',
     foreignField : 'product'
 })
 
-userSchema.virtual('Order', {
+productSchema.virtual('Order', {
     ref: "Order",
     localField : '_id',
     foreignField : 'product'
