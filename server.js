@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require('mongoose');
 const User = require("./routers/user_route");
-//const Task = require("./routers/product");
+const Product = require("./routers/product_route");
 require("dotenv").config()
 
 let url = process.env.MONGO_URL;
@@ -17,7 +17,7 @@ app.get("/", (req,res)=>{
     res.send("Successful");
 });
 app.use(User);
-//app.use(Task);
+app.use(Product);
 
 app.listen(port, () => {
     console.log(`Server is listening on ${port} port`)

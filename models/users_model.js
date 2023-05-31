@@ -100,22 +100,25 @@ userSchema.methods.generateAuthToken = async function () {
 
     return token;
 };
-userSchema.methods.toJSON = function (){
+/*userSchema.methods.toJSON = function (){
     const user = this;
     const userObject = user.toObject();
     delete  userObject.password;
     delete userObject.tokens;
     return userObject;
-}
+}*/
 const User = mongoose.model('User', userSchema);
-const newUser = new User({
+
+
+
+
+/*const newUser = new User({
     first_name: 'John',
     last_name: 'Doe',
-    email: 'johndoe@example.com',
+    email: 'johndofghe@example.com',
     password: 'pass123',
     tokens: [
-      { token: 'token123' },
-      { token: 'token456' }
+      { token: 'token123' }
     ]
   });
   
@@ -126,6 +129,7 @@ const newUser = new User({
     })
     .catch(error => {
       console.error('Error saving user:', error);
-    });
+    });*/
+
 
 module.exports = User;
