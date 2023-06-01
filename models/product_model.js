@@ -50,7 +50,8 @@ const productSchema = new mongoose.Schema({
     }
   }, {toJson : {virtual: true}, toObject: {virtual:true}})
 
-  productSchema.virtual('Review', {
+  
+productSchema.virtual('Review', {
     ref: "Review",
     localField : '_id',
     foreignField : 'product'
