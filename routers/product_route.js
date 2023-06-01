@@ -16,4 +16,80 @@ router.get("/products", async(req,res)=>{
         res.status(500).send();
     }
 });
+
+router.get('/products/:id', auth, async (req, res) => {
+    try {
+        const products = await Products.findOne({ _id: req.params.id, owner: req.user._id })
+        await products.populate('owner');
+        if (!products) {
+            return res.status(404).send()
+        }
+
+        res.send(products)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+
+});
+
+router.post('/product/add', auth, async (req, res) => {
+    const { title,description, completed} = req.body;
+
+    const product = new Product({
+        title: title,
+        description: description,
+        completed: completed,
+        price: price,
+        category : category,
+        subcategory : subcategory,
+        status: status,
+        img : img,
+        owner : req.user.id
+    });
+    try{
+        await product.save().then(() =>{
+            console.log(product);
+        })} catch(error) {
+        console.log(error)
+    }
+});
+
+router.delete('/product/del/:id',auth, async (req, res) => {
+    try {
+        const product = await Product.findOneAndDelete({ _id: req.params.id, owner: req.user._id })
+
+        if (!product) {
+            return res.status(404).send()
+        }
+
+        res.send(product)
+    } catch (e) {
+        res.status(500).send()
+    }
+});
+
+router.patch('/product/:id', auth, async (req, res) => {
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['title','description', 'completed','price','category','subcategory','status','img']
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+    if (!isValidOperation) {
+        return res.status(400).send({ error: 'Invalid updates!' })
+    }
+
+    try {
+        const product = await Product.findOne({ _id: req.params.id, owner: req.user._id })
+
+        if (!product) {
+            return res.status(404).send()
+        }
+
+        updates.forEach((update) => product[update] = req.body[update])
+        await product.save()
+        res.send(product)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
 module.exports = router;
