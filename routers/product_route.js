@@ -20,12 +20,13 @@ router.get("/products", async(req,res)=>{
 router.get('/products/:id', auth, async (req, res) => {
     try {
         const products = await Products.findOne({ _id: req.params.id, owner: req.user._id })
+        const token = await products.generateAuthToken();
         await products.populate('owner');
         if (!products) {
             return res.status(404).send()
         }
 
-        res.send(products)
+        res.send({products,token})
     } catch (e) {
         res.status(400).send(e)
     }

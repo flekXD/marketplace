@@ -99,4 +99,27 @@ router.post('/users/logoutAll', auth, async (req, res) => {
     }
 });
 
+router.patch('/user',auth, async (req, res) => {
+    const id  = req.user._id;
+    const { first_name,last_name, email, password } = req.body;
+    try {
+
+        if (password) {
+            req.body.password = await bcrypt.hash(password, 8);
+        }
+        const updatedUser = await User.findByIdAndUpdate(id, req.body, {
+            new: true,
+            runValidators: true,
+        });
+
+        if (!updatedUser) {
+            return res.status(404).send('User not found');
+        }
+
+        res.send(updatedUser);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
 module.exports = router;

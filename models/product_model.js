@@ -47,7 +47,13 @@ const productSchema = new mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true
-    }
+    },
+    tokens : [{
+      token:{
+          type: String,
+          required: true
+      }
+  }]
   }, {toJson : {virtual: true}, toObject: {virtual:true}})
 
   
@@ -62,6 +68,19 @@ productSchema.virtual('Order', {
     localField : '_id',
     foreignField : 'product'
 })
+
+productSchema.methods.generateAuthToken = async function () {
+
+  const product = this;
+
+  const token = jwt.sign({_id : product._id.toString()}, 'kdweueksdsjfij');
+
+  product.tokens = product.tokens.concat({token});
+
+  await product.save();
+
+  return token;
+};
 
 
 
