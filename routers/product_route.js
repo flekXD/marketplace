@@ -34,12 +34,11 @@ router.get('/products/:id', auth, async (req, res) => {
 });
 
 router.post('/product/add', auth, async (req, res) => {
-    const { title,description, completed} = req.body;
+    const { title,description,price,category,subcategory,status,img} = req.body;
 
     const product = new Product({
         title: title,
         description: description,
-        completed: completed,
         price: price,
         category : category,
         subcategory : subcategory,
