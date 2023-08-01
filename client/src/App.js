@@ -7,9 +7,10 @@ import {
 } from 'react-router-dom';
 
 import MainNavigation from './shared/Navigation/MainNavigation'
-import User from './User/pages/user.js';
+import Users from './User/pages/users.js';
 import Main from './Main/pages/main.js';
-import AddFormProd from './Product/AddProduct/addFormProd';
+import AddFormProd from './Product/pages/addFormProd';
+import Login from './User/pages/Login'
 import "./index.css";
 
 const App = () => {
@@ -22,7 +23,10 @@ const App = () => {
           <Main />
         </Route>
         <Route path="/user/list" exact>
-          <User />
+          <Users />
+        </Route>
+        <Route path="/user/login" exact>
+          <Login />
         </Route>
         <Route path="/product/add" exact>
           <AddFormProd />
