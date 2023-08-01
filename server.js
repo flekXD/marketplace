@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 const mongoose = require('mongoose');
 const User = require("./routers/user_route");
 const Product = require("./routers/product_route");
@@ -10,7 +11,7 @@ mongoose.connect(url)
 
 const app = express();
 
-
+app.use(cors());
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.get("/", (req,res)=>{
