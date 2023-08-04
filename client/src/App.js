@@ -12,8 +12,9 @@ import Main from './Main/pages/main.js';
 import AddFormProd from './Product/pages/addFormProd';
 import Login from './User/pages/Login'
 import "./index.css";
-
+import { useSelector } from 'react-redux';
 const App = () => {
+  const isAuth = useSelector(state => state.user.isAuth)
   return (
     <Router>
       <MainNavigation />
@@ -25,12 +26,14 @@ const App = () => {
         <Route path="/user/list" exact>
           <Users />
         </Route>
+        <Route path="/product/add" exact>
+          <AddFormProd />
+        </Route>      
+        {!isAuth &&
         <Route path="/user/login" exact>
           <Login />
         </Route>
-        <Route path="/product/add" exact>
-          <AddFormProd />
-        </Route>
+        }
         <Redirect to="/" />
       </Switch>
       </main>
