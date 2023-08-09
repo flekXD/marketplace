@@ -15,6 +15,8 @@ import "./index.css";
 import { useSelector } from 'react-redux';
 const App = () => {
   const isAuth = useSelector(state => state.user.isAuth)
+
+  
   return (
     <Router>
       <MainNavigation />

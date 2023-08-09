@@ -1,8 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./NavLinks.css"
+import { useDispatch, useSelector } from 'react-redux';
+import {logout} from '../../reducers/userReducer'
 
 const NavLinks = props => {
+    const isAuth = useSelector(state => state.user.isAuth)
+    const dispatch = useDispatch()
+
     return (
     <ul className="nav-links">
         <li>
@@ -11,12 +16,15 @@ const NavLinks = props => {
         <li>
             <NavLink to="/user/list">Me</NavLink>
         </li>
-        <li>
+        {!isAuth &&<li>
             <NavLink to="/user/cart">Cart</NavLink>
-        </li>
-        <li>
-            <NavLink to="/user/auth">Login</NavLink>
-        </li>
+        </li> }
+        {!isAuth && <li>
+            <NavLink to="/user/login">Login</NavLink>
+        </li>}
+        {isAuth && <li>
+            <NavLink to='/user/logout' onClick={()=> dispatch(logout())}>logout</NavLink>
+        </li>}
     </ul>
     )
 };
