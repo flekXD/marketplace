@@ -11,6 +11,7 @@ import Users from './User/pages/users.js';
 import Main from './Main/pages/main.js';
 import AddFormProd from './Product/pages/addFormProd';
 import Login from './User/pages/Login'
+import Register from './User/pages/Registration';
 import "./index.css";
 import { useSelector } from 'react-redux';
 const App = () => {
@@ -34,6 +35,11 @@ const App = () => {
         {!isAuth &&
         <Route path="/user/login" exact>
           <Login />
+        </Route>
+        }
+        {!isAuth &&
+        <Route path="/user/register" exact>
+           <Register />
         </Route>
         }
         <Redirect to="/" />

@@ -48,7 +48,7 @@ const Login = () => {
                     </div>
                     <div class="full-width">
                         <button type="submit">Login</button>
-                        <Link to={`/user/registration`}><button type="button">Registration</button></Link>
+                        <Link to={`/user/register`}><button type="button">Registration</button></Link>
                     </div>
                 </form>
             </main>

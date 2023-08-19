@@ -33,7 +33,7 @@ const productSchema = new mongoose.Schema({
     },
     img: {
       type: String,
-      required: true,
+      required: false,
       trim : true,
       validate: {
         validator: function (value) {
@@ -82,25 +82,6 @@ productSchema.methods.generateAuthToken = async function () {
   return token;
 };
 
-
-
-/*const newProduct = new Product({
-  name: 'Product Name',
-  description: 'Product Description',
-  price: 9.99,
-  category: 'Category',
-  subcategory: 'Subcategory',
-  status: true,
-  img: 'image.jpg',
-  owner: '6477b159717584589a08ac73'
-});
-newProduct.save()
-  .then(savedProduct => {
-    console.log('Product saved:', savedProduct);
-  })
-  .catch(error => {
-    console.error('Error saving product:', error);
-  });*/
 
 
 const Product = mongoose.model('Product', productSchema);

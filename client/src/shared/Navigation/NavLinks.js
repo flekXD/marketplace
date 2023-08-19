@@ -11,12 +11,14 @@ const NavLinks = props => {
     return (
     <ul className="nav-links">
         <li>
-            <NavLink to="/catalog">Catalog</NavLink>
+            <NavLink to="/">Catalog</NavLink>
         </li>
+        {isAuth &&
         <li>
-            <NavLink to="/user/list">Me</NavLink>
+            <NavLink to="/product/add">Add Product</NavLink>
         </li>
-        {!isAuth &&<li>
+        }
+        {isAuth &&<li>
             <NavLink to="/user/cart">Cart</NavLink>
         </li> }
         {!isAuth && <li>
